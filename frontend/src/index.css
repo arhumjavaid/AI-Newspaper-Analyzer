@@ -1,0 +1,223 @@
+/* ============================================================================
+   AI Newspaper Analyzer  ·  Light executive theme
+   Tailwind v4 (CSS-first) + shadcn token convention.
+   Base tokens in OKLCH on :root; mapped to Tailwind colors in @theme inline.
+   Color stays reserved for sentiment + primary actions; chrome is neutral.
+   ============================================================================ */
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --radius: 1rem; /* 16px — roomier, modern admin feel */
+
+  /* Chart-only tokens (theme-adaptive; mirrored for .dark below) */
+  --chart-grid: oklch(0.93 0.006 260);
+  --chart-axis: oklch(0.6 0.02 260);
+  --chart-primary-muted: oklch(0.85 0.05 264);
+
+  /* Surfaces — cool light canvas, white cards for depth */
+  --background: oklch(0.975 0.004 255);
+  --foreground: oklch(0.27 0.03 260); /* deep slate — primary ink */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.03 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.03 260);
+
+  /* Neutral hover/inset surfaces (shadcn `secondary`/`accent`/`muted`) */
+  --secondary: oklch(0.965 0.006 255);
+  --secondary-foreground: oklch(0.27 0.03 260);
+  --muted: oklch(0.965 0.006 255);
+  --muted-foreground: oklch(0.52 0.02 260); /* labels/captions ≥4.5:1 on white */
+  --accent: oklch(0.945 0.008 255); /* hover inset */
+  --accent-foreground: oklch(0.27 0.03 260);
+
+  /* Secondary ink for body copy inside cards */
+  --ink-2: oklch(0.42 0.025 260);
+
+  /* Lines */
+  --border: oklch(0.92 0.006 260);
+  --border-strong: oklch(0.87 0.01 260);
+  --input: oklch(0.87 0.01 260);
+
+  /* Primary — dark navy (complements the yellow logo) */
+  --primary: oklch(0.28 0.09 264);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-strong: oklch(0.22 0.08 264);
+  --primary-ink: oklch(0.28 0.09 264);
+  --primary-soft: oklch(0.95 0.02 264);
+  --ring: oklch(0.28 0.09 264);
+
+  /* Sentiment — tuned to read on white, always paired with a label/number */
+  --positive: oklch(0.58 0.13 158);
+  --positive-soft: oklch(0.95 0.04 158);
+  --negative: oklch(0.56 0.18 22);
+  --negative-soft: oklch(0.95 0.04 22);
+  --neutral: oklch(0.6 0.02 260);
+  --neutral-soft: oklch(0.95 0.006 260);
+  --mixed: oklch(0.66 0.13 70);
+  --mixed-soft: oklch(0.95 0.05 75);
+
+  /* Elevation — soft, layered, never heavy */
+  --shadow-sm: 0 1px 2px rgba(20, 30, 55, 0.05), 0 1px 3px rgba(20, 30, 55, 0.06);
+  --shadow-md: 0 1px 2px rgba(20, 30, 55, 0.04),
+    0 6px 20px -8px rgba(20, 30, 55, 0.14);
+}
+
+/* ── Dark — deep-slate executive variant (not pure black) ──────────────────── */
+.dark {
+  --background: oklch(0.205 0.018 260);
+  --foreground: oklch(0.96 0.005 260);
+  --card: oklch(0.25 0.02 260);
+  --card-foreground: oklch(0.96 0.005 260);
+  --popover: oklch(0.25 0.02 260);
+  --popover-foreground: oklch(0.96 0.005 260);
+
+  --secondary: oklch(0.285 0.02 260);
+  --secondary-foreground: oklch(0.96 0.005 260);
+  --muted: oklch(0.285 0.02 260);
+  --muted-foreground: oklch(0.72 0.02 260);
+  --accent: oklch(0.32 0.02 260);
+  --accent-foreground: oklch(0.96 0.005 260);
+
+  --ink-2: oklch(0.84 0.015 260);
+
+  --border: oklch(0.33 0.015 260);
+  --border-strong: oklch(0.42 0.02 260);
+  --input: oklch(0.42 0.02 260);
+
+  --primary: oklch(0.68 0.11 264);
+  --primary-foreground: oklch(0.14 0.02 260);
+  --primary-strong: oklch(0.74 0.11 264);
+  --primary-ink: oklch(0.76 0.10 264);
+  --primary-soft: oklch(0.28 0.06 264);
+  --ring: oklch(0.68 0.11 264);
+
+  --positive: oklch(0.72 0.14 158);
+  --positive-soft: oklch(0.3 0.06 158);
+  --negative: oklch(0.7 0.17 22);
+  --negative-soft: oklch(0.32 0.08 22);
+  --neutral: oklch(0.68 0.02 260);
+  --neutral-soft: oklch(0.31 0.01 260);
+  --mixed: oklch(0.78 0.12 75);
+  --mixed-soft: oklch(0.33 0.06 75);
+
+  --chart-grid: oklch(0.34 0.012 260);
+  --chart-axis: oklch(0.62 0.02 260);
+  --chart-primary-muted: oklch(0.42 0.08 264);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 24px -8px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink2: var(--ink-2);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-ink: var(--primary-ink);
+  --color-primary-soft: var(--primary-soft);
+
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-negative: var(--negative);
+  --color-negative-soft: var(--negative-soft);
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
+  --color-mixed: var(--mixed);
+  --color-mixed-soft: var(--mixed-soft);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-card: var(--shadow-sm);
+  --shadow-lift: var(--shadow-md);
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --animate-fade-in: fade-in 0.25s ease-out both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    color-scheme: light;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv05", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
+}
+
+/* Recharts: kill the default focus outline on the SVG wrapper */
+.recharts-wrapper:focus,
+.recharts-surface:focus {
+  outline: none;
+}
+
+/* ── Print / Export to PDF ──────────────────────────────────────────────── */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  /* keep card fills, badges, and chart bars in the printout */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
