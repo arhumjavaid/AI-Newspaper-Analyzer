@@ -43,9 +43,16 @@ Open http://localhost:5173 and drop in a newspaper PDF.
    injects the client context + a strict JSON schema; OpenRouter returns one record
    per relevant article (sentiment score/label, tone tags, prominence, key quote,
    entities, topics, suggested response).
-3. **Aggregate** (`pipeline/aggregate.py`): reputation index, sentiment distribution,
-   share of voice, AVE estimate, top topics, crisis alerts.
-4. **Store** (`storage.py`): one JSON per upload + an index that powers the trend line.
+3. **Classic NLP** (`services/nlp.py`, NLTK + scikit-learn, runs locally): on each
+   article's body text — cleaning, sentence/word tokenization, stopword removal,
+   Porter stemming vs WordNet lemmatization, POS tagging, NER, VADER lexicon
+   sentiment, bigrams, TF-IDF keywords (the day's articles are the corpus) and a
+   word-frequency extractive summary. NLTK corpora download to `backend/nltk_data/`
+   on first run.
+4. **Aggregate** (`pipeline/aggregate.py`): reputation index, sentiment distribution,
+   share of voice, AVE estimate, top topics, crisis alerts, and a VADER-vs-LLM
+   sentiment comparison (agreement, correlation, confusion matrix).
+5. **Store** (`storage.py`): one JSON per upload + an index that powers the trend line.
 
 ## Changing the client
 Everything is in `.env` — `CLIENT_NAME`, `CLIENT_ALIASES`, `CLIENT_DESCRIPTION`.

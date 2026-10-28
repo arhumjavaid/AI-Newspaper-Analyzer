@@ -54,6 +54,7 @@ Return ONLY valid JSON (no markdown, no commentary) with this exact shape:
       "relevance": "explicit | implicit",
       "client_mention": "verbatim phrase naming the client, or the domain phrase showing relevance",
       "summary": "1-2 sentence neutral summary of the article",
+      "body": "the article's full text exactly as printed (transcribe it for image pages), at most ~400 words",
       "page": 3,
       "prominence": "front_page | prominent | standard | minor",
       "sentiment_label": "positive | negative | neutral | mixed",
@@ -74,11 +75,14 @@ Rules:
 - sentiment_score is an integer from -100 (extremely damaging) to +100
   (extremely favourable); 0 is neutral.
 - confidence is 0.0–1.0 reflecting how sure you are this is about the client.
+- body must be the article's own words, verbatim — do not paraphrase, summarise
+  or correct it. If it is longer than ~400 words, stop at a sentence boundary.
 - tone_tags must be a subset of the allowed values shown above.
 - people / locations / organisations: list ONLY items literally present in the
   article. Do NOT guess or infer. Use [] when none are named. Never put the client
   itself in organisations.
 - executive_summary must reflect ONLY the relevant articles you found; do not
-  speculate beyond the coverage.
+  speculate beyond the coverage, and do not mention or list the articles you
+  excluded as not relevant.
 - If NO article mentions the client, return "articles": [] and a null summary.
 - Do not invent articles. Only report what is actually present.

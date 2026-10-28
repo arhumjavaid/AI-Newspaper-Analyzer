@@ -13,6 +13,7 @@ import storage
 from pipeline.aggregate import annotate_risk, build_metrics
 from pipeline.analyze import AnalysisError, analyze_pages
 from pipeline.extract import PageContent, extract_pages
+from services import nlp
 
 app = FastAPI(title="AI Newspaper Analyzer")
 
@@ -46,7 +47,7 @@ def _analyze_and_store(pages: list[PageContent], source_name: str) -> dict:
     except AnalysisError as exc:
         raise HTTPException(status_code=502, detail=str(exc))
 
-    articles = annotate_risk(result["articles"])
+    articles = nlp.enrich_articles(annotate_risk(result["articles"]))
     upload_id = uuid.uuid4().hex[:12]
     analysis = {
         "id": upload_id,

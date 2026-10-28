@@ -8,6 +8,7 @@ import Sparkline from "./components/Sparkline";
 import CrisisAlerts from "./components/CrisisAlerts";
 import ExecutiveSummary from "./components/ExecutiveSummary";
 import EntityInsights from "./components/EntityInsights";
+import NlpComparison from "./components/NlpComparison";
 import CoverageClusters from "./components/CoverageClusters";
 import CoverageRadar from "./components/CoverageRadar";
 import ArticleCard from "./components/ArticleCard";
@@ -322,6 +323,8 @@ export default function App() {
           />
 
           <EntityInsights insights={m.entity_insights} />
+
+          <NlpComparison comparison={m.nlp_comparison} />
 
           {(() => {
             const q = query.trim().toLowerCase();

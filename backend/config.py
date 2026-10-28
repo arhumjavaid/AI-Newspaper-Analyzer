@@ -18,10 +18,10 @@ load_dotenv(PROJECT_ROOT / ".env")
 # --- Gemini via Vertex AI -----------------------------------------------------
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 # Model name used in the Vertex AI publisher path (no "google/" prefix needed).
-MODEL: str = os.getenv("MODEL", "gemini-2.5-flash-lite")
+MODEL: str = os.getenv("MODEL", "gemini-3.5-flash-lite")
 # Backup model used automatically when the primary returns a transient 5xx/429
 # (e.g. 503 "model overloaded"), so a demand spike can't break analysis.
-FALLBACK_MODEL: str = os.getenv("FALLBACK_MODEL", "gemini-2.5-flash")
+FALLBACK_MODEL: str = os.getenv("FALLBACK_MODEL", "gemini-3.5-flash")
 
 APP_TITLE: str = os.getenv("APP_TITLE", "AI Newspaper Analyzer")
 APP_URL: str = os.getenv("APP_URL", "http://localhost:5173")

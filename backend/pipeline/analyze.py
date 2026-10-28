@@ -223,6 +223,7 @@ def _clean_articles(articles: list) -> list[dict]:
                 "relevance": relevance,
                 "client_mention": (a.get("client_mention") or "").strip(),
                 "summary": str(a.get("summary", "")).strip(),
+                "body": str(a.get("body") or "").strip(),
                 "page": a.get("page"),
                 "prominence": prominence,
                 "sentiment_label": label,

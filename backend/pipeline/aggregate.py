@@ -5,6 +5,7 @@ AVE (Advertising Value Equivalent) estimate, top topics, and crisis alerts.
 """
 from __future__ import annotations
 
+import statistics
 from collections import Counter
 
 from config import (
@@ -145,6 +146,43 @@ def _crisis_alerts(articles: list[dict]) -> list[dict]:
     return sorted(alerts, key=lambda x: x["sentiment_score"])
 
 
+def _nlp_comparison(articles: list[dict]) -> dict | None:
+    """Agreement between the local VADER lexicon and the LLM's sentiment.
+
+    The LLM can also say "mixed", which VADER cannot, so those rows always count
+    as disagreements; the confusion matrix makes that visible.
+    """
+    pairs = [
+        (a["sentiment_label"], a["nlp"]["vader"]["label"], a["sentiment_score"], a["nlp"]["vader"]["score"])
+        for a in articles
+        if a.get("nlp")
+    ]
+    if not pairs:
+        return None
+    llm_labels = ["positive", "neutral", "negative", "mixed"]
+    vader_labels = ["positive", "neutral", "negative"]
+    matrix = {l: {v: 0 for v in vader_labels} for l in llm_labels}
+    for llm, vader, _, _ in pairs:
+        matrix[llm][vader] += 1
+    agree = sum(1 for llm, vader, _, _ in pairs if llm == vader)
+
+    correlation = None
+    llm_scores = [p[2] for p in pairs]
+    vader_scores = [p[3] for p in pairs]
+    if len(pairs) >= 2 and len(set(llm_scores)) > 1 and len(set(vader_scores)) > 1:
+        correlation = round(statistics.correlation(llm_scores, vader_scores), 2)
+
+    return {
+        "articles": len(pairs),
+        "agreement": round(agree / len(pairs), 2),
+        "score_correlation": correlation,
+        "mean_abs_score_diff": round(
+            sum(abs(l - v) for l, v in zip(llm_scores, vader_scores)) / len(pairs)
+        ),
+        "confusion_matrix": matrix,
+    }
+
+
 def build_metrics(articles: list[dict]) -> dict:
     return {
         "reputation_index": _reputation_index(articles),
@@ -155,6 +193,7 @@ def build_metrics(articles: list[dict]) -> dict:
         "risk_distribution": _risk_distribution(articles),
         "entity_insights": _entity_insights(articles),
         "crisis_alerts": _crisis_alerts(articles),
+        "nlp_comparison": _nlp_comparison(articles),
         "average_sentiment": (
             round(sum(a["sentiment_score"] for a in articles) / len(articles))
             if articles

@@ -2,6 +2,7 @@ import React from "react";
 import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import ArticleNlp from "./ArticleNlp";
 
 const RISK = {
   critical: { label: "Critical", variant: "negative", dot: "bg-negative" },
@@ -83,6 +84,8 @@ export default function ArticleCard({ article }) {
         {a.entities?.length > 0 && <span>Mentions: {a.entities.join(", ")}</span>}
         <span>Confidence {Math.round((a.confidence ?? 0) * 100)}%</span>
       </div>
+
+      <ArticleNlp nlp={a.nlp} llmLabel={a.sentiment_label} />
     </div>
   );
 }

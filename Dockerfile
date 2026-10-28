@@ -19,6 +19,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
+# NLTK corpora (tokenizer, stopwords, WordNet, POS tagger, NER chunker, VADER)
+RUN python -m nltk.downloader -d /app/backend/nltk_data \
+    punkt_tab stopwords wordnet omw-1.4 averaged_perceptron_tagger_eng \
+    maxent_ne_chunker_tab words vader_lexicon
+
 # Copy backend source
 COPY backend/ /app/backend/
 

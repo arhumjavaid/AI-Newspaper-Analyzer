@@ -20,6 +20,11 @@ MOCK = {
         {
             "headline": "K-Electric blamed for prolonged load-shedding",
             "summary": "Residents protest unannounced load-shedding.",
+            "body": ("Residents of several Karachi neighbourhoods staged protests on Monday, "
+                     "accusing K-Electric of subjecting them to hours of unannounced "
+                     "load-shedding despite paying inflated bills. \"KE has once again failed "
+                     "the people of this city,\" said a protester. Critics say the utility's "
+                     "excuses have worn thin."),
             "page": 1,
             "prominence": "front_page",
             "sentiment_label": "negative",
@@ -36,6 +41,10 @@ MOCK = {
         {
             "headline": "NEPRA approves tariff relief; KE welcomes decision",
             "summary": "Small tariff adjustment welcomed by the utility.",
+            "body": ("In a separate development, NEPRA announced a small tariff adjustment. "
+                     "K-Electric welcomed the regulator's decision, saying it would help "
+                     "sustain investment in the grid and improve supply reliability for "
+                     "consumers across Karachi."),
             "page": 3,
             "prominence": "standard",
             "sentiment_label": "positive",
@@ -52,6 +61,9 @@ MOCK = {
         {
             "headline": "KE completes new grid station to boost supply",
             "summary": "New grid station strengthens supply.",
+            "body": ("K-Electric announced the completion of a new grid station in the "
+                     "industrial area, a move the company says will strengthen supply to "
+                     "thousands of businesses and households."),
             "page": 5,
             "prominence": "minor",
             "sentiment_label": "positive",
@@ -114,6 +126,14 @@ for n in (1, 2):
     print("  article risk    :", [x["risk_level"] for x in a["articles"]])
     assert a.get("executive_summary"), "executive_summary missing"
     assert all("risk_level" in x for x in a["articles"]), "risk_level missing"
+    nlp0 = a["articles"][0]["nlp"]
+    print("  nlp stats       :", nlp0["stats"])
+    print("  nlp keywords    :", [k["term"] for k in nlp0["keywords"]])
+    print("  nlp entities    :", nlp0["entities"])
+    print("  nlp vader       :", [x["nlp"]["vader"]["label"] for x in a["articles"]])
+    print("  nlp comparison  :", m["nlp_comparison"])
+    assert all(x["nlp"]["source"] == "body" for x in a["articles"]), "body not used"
+    assert m["nlp_comparison"]["articles"] == 3, "nlp_comparison missing"
 
 # list + trends
 ups = client.get("/api/uploads").json()
