@@ -7,7 +7,8 @@ the basic NLP pipeline to that text so the analysis is not a black box:
   lemmatization -> POS tagging -> named-entity recognition -> VADER lexicon
   sentiment -> n-grams -> TF-IDF keywords -> frequency-based extractive summary.
 
-Results are attached to each article under the "nlp" key.
+services/engine.py runs this on every article and builds the dashboard's analysis
+from it; the results are attached to each article under the "nlp" key.
 """
 from __future__ import annotations
 
@@ -15,6 +16,7 @@ import re
 from collections import Counter
 
 import nltk
+from nltk.chunk import ne_chunker
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
 from nltk.stem import PorterStemmer, WordNetLemmatizer
@@ -50,11 +52,13 @@ _stopwords: set[str] = set()
 _stemmer = PorterStemmer()
 _lemmatizer = WordNetLemmatizer()
 _vader: SentimentIntensityAnalyzer | None = None
+# nltk.ne_chunk() reloads the MaxEnt model from disk on every call, so keep one.
+_ne_chunker = None
 
 
 def _ensure_ready() -> None:
     """Point NLTK at the project data dir and download anything missing (once)."""
-    global _ready, _stopwords, _vader
+    global _ready, _stopwords, _vader, _ne_chunker
     if _ready:
         return
     _NLTK_DIR.mkdir(parents=True, exist_ok=True)
@@ -67,6 +71,7 @@ def _ensure_ready() -> None:
             nltk.download(package, download_dir=str(_NLTK_DIR), quiet=True)
     _stopwords = set(stopwords.words("english")) | _EXTRA_STOPWORDS
     _vader = SentimentIntensityAnalyzer()
+    _ne_chunker = ne_chunker()
     _ready = True
 
 
@@ -137,7 +142,7 @@ _NE_BUCKETS = {
 def _named_entities(tagged_sents: list[list[tuple[str, str]]]) -> dict[str, list[str]]:
     found: dict[str, Counter] = {b: Counter() for b in set(_NE_BUCKETS.values())}
     for tagged in tagged_sents:
-        for node in nltk.ne_chunk(tagged):
+        for node in _ne_chunker.parse(tagged):
             if hasattr(node, "label") and node.label() in _NE_BUCKETS:
                 name = " ".join(word for word, _ in node.leaves())
                 found[_NE_BUCKETS[node.label()]][name] += 1
@@ -181,16 +186,21 @@ def _top_bigrams(sent_lemmas: list[list[str]], limit: int = 5) -> list[dict]:
 
 # --- 9. TF-IDF keywords ----------------------------------------------------------------
 
-def _terms(sent_lemmas: list[list[str]]) -> list[str]:
+def terms(sent_lemmas: list[list[str]]) -> list[str]:
     """Unigrams + bigrams used as TF-IDF features."""
     return [l for lemmas in sent_lemmas for l in lemmas] + _bigrams(sent_lemmas)
 
 
-def _tfidf_keywords(docs: list[list[str]], limit: int = 6) -> list[list[dict]]:
+def identity(doc: list[str]) -> list[str]:
+    """TF-IDF analyzer for already-tokenised input (module-level so joblib can pickle it)."""
+    return doc
+
+
+def tfidf_keywords(docs: list[list[str]], limit: int = 6) -> list[list[dict]]:
     """Top TF-IDF terms per document, with the day's articles as the corpus."""
     if not any(docs):
         return [[] for _ in docs]
-    vectorizer = TfidfVectorizer(analyzer=lambda terms: terms, sublinear_tf=True)
+    vectorizer = TfidfVectorizer(analyzer=identity, sublinear_tf=True)
     matrix = vectorizer.fit_transform(docs)
     vocab = vectorizer.get_feature_names_out()
     out = []
@@ -227,7 +237,7 @@ def _extractive_summary(
 
 # --- Pipeline ------------------------------------------------------------------------------
 
-def _article_source_text(article: dict) -> tuple[str, str]:
+def article_source_text(article: dict) -> tuple[str, str]:
     """The text to analyse: the article body, else headline + summary."""
     body = (article.get("body") or "").strip()
     if body:
@@ -288,17 +298,3 @@ def analyze_text(text: str) -> tuple[dict, list[list[str]]]:
         "extractive_summary": _extractive_summary(sentences, sent_lemmas),
     }
     return result, sent_lemmas
-
-
-def enrich_articles(articles: list[dict]) -> list[dict]:
-    """Attach an `nlp` block to every article in place; return the same list."""
-    lemma_docs = []
-    for a in articles:
-        text, source = _article_source_text(a)
-        result, sent_lemmas = analyze_text(text)
-        result["source"] = source
-        a["nlp"] = result
-        lemma_docs.append(_terms(sent_lemmas))
-    for a, keywords in zip(articles, _tfidf_keywords(lemma_docs)):
-        a["nlp"]["keywords"] = keywords
-    return articles

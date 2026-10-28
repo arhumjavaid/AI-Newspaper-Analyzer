@@ -1,0 +1,824 @@
+{
+  "n_articles": 89,
+  "n_stories": 73,
+  "label_counts": {
+    "positive": 33,
+    "neutral": 25,
+    "negative": 31
+  },
+  "results": {
+    "Majority-class baseline": {
+      "accuracy": 0.371,
+      "macro_precision": 0.124,
+      "macro_recall": 0.333,
+      "macro_f1": 0.18,
+      "cohen_kappa": 0.0,
+      "per_class": {
+        "positive": {
+          "precision": 0.371,
+          "recall": 1.0,
+          "f1": 0.541,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          33,
+          0,
+          0
+        ],
+        [
+          25,
+          0,
+          0
+        ],
+        [
+          31,
+          0,
+          0
+        ]
+      ]
+    },
+    "VADER, stock lexicon, whole article": {
+      "accuracy": 0.629,
+      "macro_precision": 0.426,
+      "macro_recall": 0.583,
+      "macro_f1": 0.491,
+      "cohen_kappa": 0.42,
+      "per_class": {
+        "positive": {
+          "precision": 0.569,
+          "recall": 0.879,
+          "f1": 0.69,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.711,
+          "recall": 0.871,
+          "f1": 0.783,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          29,
+          0,
+          4
+        ],
+        [
+          18,
+          0,
+          7
+        ],
+        [
+          4,
+          0,
+          27
+        ]
+      ]
+    },
+    "VADER + domain lexicon, whole article": {
+      "accuracy": 0.64,
+      "macro_precision": 0.427,
+      "macro_recall": 0.595,
+      "macro_f1": 0.497,
+      "cohen_kappa": 0.439,
+      "per_class": {
+        "positive": {
+          "precision": 0.614,
+          "recall": 0.818,
+          "f1": 0.701,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.667,
+          "recall": 0.968,
+          "f1": 0.789,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          27,
+          0,
+          6
+        ],
+        [
+          16,
+          0,
+          9
+        ],
+        [
+          1,
+          0,
+          30
+        ]
+      ]
+    },
+    "VADER + domain lexicon, target sentences": {
+      "accuracy": 0.652,
+      "macro_precision": 0.762,
+      "macro_recall": 0.611,
+      "macro_f1": 0.544,
+      "cohen_kappa": 0.458,
+      "per_class": {
+        "positive": {
+          "precision": 0.628,
+          "recall": 0.818,
+          "f1": 0.711,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 0.08,
+          "f1": 0.148,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.659,
+          "recall": 0.935,
+          "f1": 0.773,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          27,
+          0,
+          6
+        ],
+        [
+          14,
+          2,
+          9
+        ],
+        [
+          2,
+          0,
+          29
+        ]
+      ]
+    },
+    "Naive Bayes, TF-IDF": {
+      "accuracy": 0.629,
+      "macro_precision": 0.584,
+      "macro_recall": 0.601,
+      "macro_f1": 0.583,
+      "cohen_kappa": 0.433,
+      "per_class": {
+        "positive": {
+          "precision": 0.676,
+          "recall": 0.758,
+          "f1": 0.714,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.4,
+          "recall": 0.24,
+          "f1": 0.3,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.676,
+          "recall": 0.806,
+          "f1": 0.735,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          25,
+          4,
+          4
+        ],
+        [
+          11,
+          6,
+          8
+        ],
+        [
+          1,
+          5,
+          25
+        ]
+      ]
+    },
+    "Linear SVM, TF-IDF": {
+      "accuracy": 0.719,
+      "macro_precision": 0.711,
+      "macro_recall": 0.707,
+      "macro_f1": 0.708,
+      "cohen_kappa": 0.574,
+      "per_class": {
+        "positive": {
+          "precision": 0.722,
+          "recall": 0.788,
+          "f1": 0.754,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.636,
+          "recall": 0.56,
+          "f1": 0.596,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.774,
+          "recall": 0.774,
+          "f1": 0.774,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          26,
+          3,
+          4
+        ],
+        [
+          8,
+          14,
+          3
+        ],
+        [
+          2,
+          5,
+          24
+        ]
+      ]
+    },
+    "LogReg, TF-IDF": {
+      "accuracy": 0.73,
+      "macro_precision": 0.72,
+      "macro_recall": 0.718,
+      "macro_f1": 0.718,
+      "cohen_kappa": 0.591,
+      "per_class": {
+        "positive": {
+          "precision": 0.765,
+          "recall": 0.788,
+          "f1": 0.776,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.636,
+          "recall": 0.56,
+          "f1": 0.596,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.758,
+          "recall": 0.806,
+          "f1": 0.781,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          26,
+          3,
+          4
+        ],
+        [
+          7,
+          14,
+          4
+        ],
+        [
+          1,
+          5,
+          25
+        ]
+      ]
+    },
+    "LogReg, TF-IDF + domain VADER": {
+      "accuracy": 0.697,
+      "macro_precision": 0.691,
+      "macro_recall": 0.691,
+      "macro_f1": 0.689,
+      "cohen_kappa": 0.544,
+      "per_class": {
+        "positive": {
+          "precision": 0.759,
+          "recall": 0.667,
+          "f1": 0.71,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.556,
+          "recall": 0.6,
+          "f1": 0.577,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.758,
+          "recall": 0.806,
+          "f1": 0.781,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          22,
+          7,
+          4
+        ],
+        [
+          6,
+          15,
+          4
+        ],
+        [
+          1,
+          5,
+          25
+        ]
+      ]
+    },
+    "LogReg, TF-IDF + target terms": {
+      "accuracy": 0.674,
+      "macro_precision": 0.655,
+      "macro_recall": 0.657,
+      "macro_f1": 0.654,
+      "cohen_kappa": 0.506,
+      "per_class": {
+        "positive": {
+          "precision": 0.735,
+          "recall": 0.758,
+          "f1": 0.746,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.524,
+          "recall": 0.44,
+          "f1": 0.478,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.706,
+          "recall": 0.774,
+          "f1": 0.738,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          25,
+          4,
+          4
+        ],
+        [
+          8,
+          11,
+          6
+        ],
+        [
+          1,
+          6,
+          24
+        ]
+      ]
+    },
+    "LogReg, TF-IDF + target terms + stock VADER": {
+      "accuracy": 0.697,
+      "macro_precision": 0.692,
+      "macro_recall": 0.69,
+      "macro_f1": 0.69,
+      "cohen_kappa": 0.544,
+      "per_class": {
+        "positive": {
+          "precision": 0.793,
+          "recall": 0.697,
+          "f1": 0.742,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.556,
+          "recall": 0.6,
+          "f1": 0.577,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.727,
+          "recall": 0.774,
+          "f1": 0.75,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          23,
+          6,
+          4
+        ],
+        [
+          5,
+          15,
+          5
+        ],
+        [
+          1,
+          6,
+          24
+        ]
+      ]
+    },
+    "LogReg, TF-IDF + target terms + domain VADER": {
+      "accuracy": 0.697,
+      "macro_precision": 0.691,
+      "macro_recall": 0.691,
+      "macro_f1": 0.689,
+      "cohen_kappa": 0.544,
+      "per_class": {
+        "positive": {
+          "precision": 0.759,
+          "recall": 0.667,
+          "f1": 0.71,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.556,
+          "recall": 0.6,
+          "f1": 0.577,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.758,
+          "recall": 0.806,
+          "f1": 0.781,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          22,
+          7,
+          4
+        ],
+        [
+          6,
+          15,
+          4
+        ],
+        [
+          1,
+          5,
+          25
+        ]
+      ]
+    },
+    "Gemini (LLM benchmark, zero-shot)": {
+      "accuracy": 0.775,
+      "macro_precision": 0.766,
+      "macro_recall": 0.754,
+      "macro_f1": 0.755,
+      "cohen_kappa": 0.67,
+      "per_class": {
+        "positive": {
+          "precision": 0.763,
+          "recall": 0.879,
+          "f1": 0.817,
+          "support": 33
+        },
+        "neutral": {
+          "precision": 0.632,
+          "recall": 0.48,
+          "f1": 0.545,
+          "support": 25
+        },
+        "negative": {
+          "precision": 0.903,
+          "recall": 0.903,
+          "f1": 0.903,
+          "support": 31
+        }
+      },
+      "confusion_matrix": [
+        [
+          29,
+          4,
+          0
+        ],
+        [
+          9,
+          12,
+          3
+        ],
+        [
+          0,
+          3,
+          28
+        ]
+      ]
+    }
+  },
+  "notes": {
+    "VADER, stock lexicon, whole article": "rule-based, no training",
+    "VADER + domain lexicon, whole article": "rule-based, no training",
+    "VADER + domain lexicon, target sentences": "rule-based, no training",
+    "Naive Bayes, TF-IDF": "nested CV; hyperparameter chosen per outer fold: [0.1, 0.1, 0.1, 0.1, 0.5]",
+    "Linear SVM, TF-IDF": "nested CV; hyperparameter chosen per outer fold: [3, 1, 10, 10, 3]",
+    "LogReg, TF-IDF": "nested CV; hyperparameter chosen per outer fold: [10, 1, 1, 10, 10]",
+    "LogReg, TF-IDF + domain VADER": "nested CV; hyperparameter chosen per outer fold: [0.3, 1, 0.3, 0.3, 0.3]",
+    "LogReg, TF-IDF + target terms": "nested CV; hyperparameter chosen per outer fold: [3, 3, 10, 3, 1]",
+    "LogReg, TF-IDF + target terms + stock VADER": "nested CV; hyperparameter chosen per outer fold: [10, 0.1, 0.3, 1, 0.3]",
+    "LogReg, TF-IDF + target terms + domain VADER": "nested CV; hyperparameter chosen per outer fold: [0.3, 1, 0.3, 0.3, 0.3]",
+    "Gemini (LLM benchmark, zero-shot)": "4 'mixed' folded into neutral; 1 not detected as relevant (counted wrong)"
+  },
+  "review_flag": {
+    "articles": 89,
+    "flagged": 29,
+    "engine_errors": 24,
+    "errors_caught": 19,
+    "error_rate_flagged": 0.655,
+    "error_rate_unflagged": 0.083
+  },
+  "engine_errors": [
+    {
+      "id": 1,
+      "headline": "K-Electric starts load shedding in exempted areas of Karachi",
+      "gold": "negative",
+      "engine": "positive",
+      "gemini": "negative",
+      "target_sentences": 5,
+      "reason": "load shedding extended to exempted areas, residents in difficulty"
+    },
+    {
+      "id": 2,
+      "headline": "K-Electric ends temporary load shedding in Karachi",
+      "gold": "positive",
+      "engine": "negative",
+      "gemini": "mixed",
+      "target_sentences": 6,
+      "reason": "temporary load shedding ended, supply improved"
+    },
+    {
+      "id": 17,
+      "headline": "K-Electric re appoints syed moonir alvi as CEO",
+      "gold": "positive",
+      "engine": "neutral",
+      "gemini": "positive",
+      "target_sentences": 7,
+      "reason": "CEO reappointed, credited with a 'future-ready' entity"
+    },
+    {
+      "id": 23,
+      "headline": "Two die from electrocution as rain continues in Karachi",
+      "gold": "neutral",
+      "engine": "negative",
+      "gemini": "not_detected",
+      "target_sentences": 0,
+      "reason": "electrocution deaths but excerpt focuses on civic drains, KE not blamed"
+    },
+    {
+      "id": 26,
+      "headline": "Nepra imposes Rs25m fine on K-Electric",
+      "gold": "negative",
+      "engine": "neutral",
+      "gemini": "negative",
+      "target_sentences": 5,
+      "reason": "regulator fines KE for blackout failures"
+    },
+    {
+      "id": 27,
+      "headline": "K-Electric fined Rs25m over 2023 blackout",
+      "gold": "negative",
+      "engine": "neutral",
+      "gemini": "negative",
+      "target_sentences": 5,
+      "reason": "regulator fines KE for blackout failures"
+    },
+    {
+      "id": 32,
+      "headline": "Power restored in many areas of Karachi after major outage",
+      "gold": "positive",
+      "engine": "negative",
+      "gemini": "neutral",
+      "target_sentences": 4,
+      "reason": "swift restoration, KE system intact"
+    },
+    {
+      "id": 33,
+      "headline": "Power breakdown hits several areas of Karachi as transmission line trips",
+      "gold": "neutral",
+      "engine": "negative",
+      "gemini": "neutral",
+      "target_sentences": 5,
+      "reason": "outage caused by external line trip, swift restoration"
+    },
+    {
+      "id": 34,
+      "headline": "Regulator approves Rs392bn investment plan for K-Electric",
+      "gold": "positive",
+      "engine": "neutral",
+      "gemini": "positive",
+      "target_sentences": 4,
+      "reason": "regulator approves KE's Rs392bn investment plan"
+    },
+    {
+      "id": 35,
+      "headline": "Karachi industry cries out over power tariffs",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "positive",
+      "target_sentences": 4,
+      "reason": "industry angry over tariffs vs KE's Rs15bn investment"
+    },
+    {
+      "id": 36,
+      "headline": "K-Electric seeks Rs3.84 per unit base tariff hike for seven years",
+      "gold": "negative",
+      "engine": "neutral",
+      "gemini": "neutral",
+      "target_sentences": 5,
+      "reason": "KE seeks base tariff hike for seven years"
+    },
+    {
+      "id": 37,
+      "headline": "K-Electric inks deal to double national grid supply",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "mixed",
+      "target_sentences": 7,
+      "reason": "grid supply deal amid business opposition and write-off doubts"
+    },
+    {
+      "id": 43,
+      "headline": "KE admits up to 10 hours of loadshedding in several areas",
+      "gold": "negative",
+      "engine": "neutral",
+      "gemini": "neutral",
+      "target_sentences": 4,
+      "reason": "KE 'admits' up to 10 hours of loadshedding"
+    },
+    {
+      "id": 55,
+      "headline": "NEPRA introduces heavy markup for consumers paying bills in installments",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "negative",
+      "target_sentences": 1,
+      "reason": "regulator markup policy for all utilities"
+    },
+    {
+      "id": 56,
+      "headline": "Moonis Alvi re-appointed as CEO of K-Electric",
+      "gold": "positive",
+      "engine": "neutral",
+      "gemini": "positive",
+      "target_sentences": 6,
+      "reason": "CEO reappointed, praised for transformation"
+    },
+    {
+      "id": 57,
+      "headline": "K-Electric posts Rs4.13bn profit for FY24 amid sector headwinds",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "positive",
+      "target_sentences": 3,
+      "reason": "profit, but losses up and recovery down"
+    },
+    {
+      "id": 59,
+      "headline": "Power restored in most areas of Karachi after major outage",
+      "gold": "positive",
+      "engine": "negative",
+      "gemini": "neutral",
+      "target_sentences": 3,
+      "reason": "power restored swiftly after outage"
+    },
+    {
+      "id": 60,
+      "headline": "After major power breakdown, electricity supply to Karachi normalizes",
+      "gold": "neutral",
+      "engine": "negative",
+      "gemini": "mixed",
+      "target_sentences": 3,
+      "reason": "KE lines tripped; supply restored after hours"
+    },
+    {
+      "id": 70,
+      "headline": "K-Electric appoints Adeeb Ahmad as interim CEO",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "neutral",
+      "target_sentences": 7,
+      "reason": "interim CEO named"
+    },
+    {
+      "id": 75,
+      "headline": "K-Electric Posts Staggering Loss of Over Rs. 27 Billion in First Half of FY23",
+      "gold": "negative",
+      "engine": "neutral",
+      "gemini": "negative",
+      "target_sentences": 3,
+      "reason": "'staggering' Rs27bn loss"
+    },
+    {
+      "id": 84,
+      "headline": "K-Electric Announces Relief for Karachi Consumers During Ashura",
+      "gold": "positive",
+      "engine": "negative",
+      "gemini": "positive",
+      "target_sentences": 5,
+      "reason": "loadshedding suspended for Ashura"
+    },
+    {
+      "id": 85,
+      "headline": "K-Electric Introduces New Load-shedding Schedule",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "neutral",
+      "target_sentences": 7,
+      "reason": "new loadshedding schedule announced"
+    },
+    {
+      "id": 86,
+      "headline": "K-Electric Announces Load-Shedding Schedule for Several Areas",
+      "gold": "neutral",
+      "engine": "negative",
+      "gemini": "neutral",
+      "target_sentences": 5,
+      "reason": "maintenance shutdown schedule"
+    },
+    {
+      "id": 87,
+      "headline": "K-Electric Announces Financial Results For FY24",
+      "gold": "neutral",
+      "engine": "positive",
+      "gemini": "positive",
+      "target_sentences": 5,
+      "reason": "FY24 results: profit amid rising losses"
+    }
+  ],
+  "engine_name": "LogReg, TF-IDF",
+  "engine_C": 10,
+  "engine_top_features": {
+    "negative": [
+      "day",
+      "loadshedding",
+      "protest",
+      "ji",
+      "party",
+      "complaint",
+      "fail",
+      "hour",
+      "committee",
+      "overbilling",
+      "black",
+      "outage"
+    ],
+    "neutral": [
+      "station",
+      "pm",
+      "new",
+      "decision",
+      "adjustment",
+      "director",
+      "consumer",
+      "fy",
+      "however",
+      "revise",
+      "august",
+      "tariff"
+    ],
+    "positive": [
+      "project",
+      "award",
+      "investment",
+      "customer",
+      "distribution",
+      "effort",
+      "payment",
+      "generation",
+      "drive",
+      "provide",
+      "towards",
+      "energy"
+    ]
+  }
+}

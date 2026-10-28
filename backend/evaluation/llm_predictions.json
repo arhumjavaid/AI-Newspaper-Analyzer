@@ -1,0 +1,714 @@
+{
+  "0": {
+    "label": "negative",
+    "score": -45,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "1": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "2": {
+    "label": "mixed",
+    "score": 10,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "3": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "4": {
+    "label": "negative",
+    "score": -45,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "5": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "6": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "7": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "8": {
+    "label": "negative",
+    "score": -65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "9": {
+    "label": "negative",
+    "score": -90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "10": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "11": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "12": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "13": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "14": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "15": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "16": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "17": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "18": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "19": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "20": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "21": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "22": {
+    "label": "negative",
+    "score": -90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "23": {
+    "label": "not_detected",
+    "score": null,
+    "confidence": null,
+    "relevance": null,
+    "n_articles": 0,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "24": {
+    "label": "negative",
+    "score": -90,
+    "confidence": 0.95,
+    "relevance": "implicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "25": {
+    "label": "negative",
+    "score": -90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "26": {
+    "label": "negative",
+    "score": -70,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "27": {
+    "label": "negative",
+    "score": -70,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "28": {
+    "label": "positive",
+    "score": 90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "29": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "30": {
+    "label": "negative",
+    "score": -85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "31": {
+    "label": "negative",
+    "score": -80,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "32": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "33": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "34": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "35": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "36": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "37": {
+    "label": "mixed",
+    "score": 10,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "38": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "39": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "40": {
+    "label": "negative",
+    "score": -90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "41": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "42": {
+    "label": "negative",
+    "score": -65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "43": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "44": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "45": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "46": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "47": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "48": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "49": {
+    "label": "mixed",
+    "score": -10,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "50": {
+    "label": "negative",
+    "score": -65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "51": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "52": {
+    "label": "positive",
+    "score": 65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "53": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "54": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "55": {
+    "label": "negative",
+    "score": -40,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "56": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "57": {
+    "label": "positive",
+    "score": 65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "58": {
+    "label": "negative",
+    "score": -75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "59": {
+    "label": "neutral",
+    "score": 10,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "60": {
+    "label": "mixed",
+    "score": -15,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "61": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "62": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "63": {
+    "label": "positive",
+    "score": 80,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "64": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "65": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "66": {
+    "label": "positive",
+    "score": 80,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "67": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "68": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "69": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "70": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "71": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "72": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "73": {
+    "label": "negative",
+    "score": -45,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "74": {
+    "label": "negative",
+    "score": -65,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "75": {
+    "label": "negative",
+    "score": -60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "76": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "77": {
+    "label": "positive",
+    "score": 80,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "78": {
+    "label": "positive",
+    "score": 90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "79": {
+    "label": "positive",
+    "score": 90,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "80": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "81": {
+    "label": "positive",
+    "score": 75,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "82": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "83": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "84": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "85": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "86": {
+    "label": "neutral",
+    "score": 0,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "87": {
+    "label": "positive",
+    "score": 60,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  },
+  "88": {
+    "label": "positive",
+    "score": 85,
+    "confidence": 1.0,
+    "relevance": "explicit",
+    "n_articles": 1,
+    "model": "gemini-3.5-flash-lite"
+  }
+}

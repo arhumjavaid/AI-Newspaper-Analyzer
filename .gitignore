@@ -5,3 +5,4 @@ __pycache__/
 backend/data/
 dist/
 backend/nltk_data/
+backend/evaluation/raw/

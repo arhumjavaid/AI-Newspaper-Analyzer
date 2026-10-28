@@ -36,7 +36,7 @@ export default function App() {
   const [clusterFilter, setClusterFilter] = useState(null);
   const [feedView, setFeedView] = useState("cards"); // "cards" | "table"
   const [query, setQuery] = useState("");
-  const [feedFilter, setFeedFilter] = useState("all"); // all|critical|negative|front
+  const [feedFilter, setFeedFilter] = useState("all"); // all|critical|negative|front|review
   const [exporting, setExporting] = useState(false);
   const reportRef = useRef(null);
 
@@ -301,6 +301,7 @@ export default function App() {
           <ExecutiveSummary
             summary={analysis.executive_summary}
             reputation={m.reputation_index}
+            engineMode={!!analysis.engine}
           />
 
           <CoverageRadar analysis={analysis} />
@@ -324,7 +325,7 @@ export default function App() {
 
           <EntityInsights insights={m.entity_insights} />
 
-          <NlpComparison comparison={m.nlp_comparison} />
+          <NlpComparison comparison={m.nlp_comparison} reviewCount={m.review_count} engineMode={!!analysis.engine} />
 
           {(() => {
             const q = query.trim().toLowerCase();
@@ -349,6 +350,11 @@ export default function App() {
                 key: "front",
                 label: "Front-page",
                 test: (a) => a.prominence === "front_page",
+              },
+              {
+                key: "review",
+                label: "Needs review",
+                test: (a) => a.needs_review,
               },
             ];
             const counts = Object.fromEntries(

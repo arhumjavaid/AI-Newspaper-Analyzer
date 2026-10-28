@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 
-// Collapsible view of the local NLP pass (backend/services/nlp.py) for one article.
+// Collapsible view of the NLP engine's work (backend/services/engine.py + nlp.py) for one article.
 const ENTITY_GROUPS = [
   { key: "people", label: "Person" },
   { key: "locations", label: "Location" },
@@ -31,7 +31,8 @@ export default function ArticleNlp({ nlp, llmLabel }) {
       <summary className="cursor-pointer select-none px-3 py-2 text-[12.5px] font-semibold text-foreground">
         NLP Analysis
         <span className="ml-2 font-normal text-muted-foreground">
-          {s.sentences} sentences · {s.tokens} tokens · VADER {nlp.vader.label}
+          {s.sentences} sentences · {s.tokens} tokens
+          {nlp.engine ? ` · engine ${nlp.engine.label}` : ` · VADER ${nlp.vader.label}`}
           {nlp.source === "summary" && " · from summary (no body text)"}
         </span>
       </summary>
@@ -51,16 +52,40 @@ export default function ArticleNlp({ nlp, llmLabel }) {
           </div>
         </Section>
 
-        <Section title="Sentiment (VADER lexicon)">
+        {nlp.engine && (
+          <Section title="NLP engine verdict (drives the dashboard)">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant={nlp.engine.label}>
+                {nlp.engine.label} {nlp.engine.score > 0 ? `+${nlp.engine.score}` : nlp.engine.score}
+              </Badge>
+              <span className="text-muted-foreground">
+                {Math.round(nlp.engine.confidence * 100)}% confident ·{" "}
+                {nlp.engine.target_sentences} sentence{nlp.engine.target_sentences === 1 ? "" : "s"} about
+                the client · target VADER {nlp.engine.target_vader}
+              </span>
+            </div>
+            {nlp.engine.why?.length > 0 && (
+              <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px]">
+                <span className="text-muted-foreground">Why:</span>
+                {nlp.engine.why.map((w) => (
+                  <Badge key={w.feature} variant="outline" className="font-mono text-[11px]" title={`weight ${w.weight}`}>
+                    {w.feature}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </Section>
+        )}
+
+        <Section title="Comparison: stock VADER and Gemini benchmark">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant={nlp.vader.label}>
               VADER {nlp.vader.label} {nlp.vader.score > 0 ? `+${nlp.vader.score}` : nlp.vader.score}
             </Badge>
-            <span className="text-muted-foreground">vs</span>
-            <Badge variant={llmLabel}>Gemini {llmLabel}</Badge>
+            {llmLabel && <Badge variant={llmLabel}>Gemini {llmLabel}</Badge>}
           </div>
           <div className="mt-1.5 text-[12px] text-muted-foreground">
-            compound {nlp.vader.compound} · pos {nlp.vader.pos} · neu {nlp.vader.neu} · neg {nlp.vader.neg}
+            VADER compound {nlp.vader.compound} · pos {nlp.vader.pos} · neu {nlp.vader.neu} · neg {nlp.vader.neg}
           </div>
         </Section>
 

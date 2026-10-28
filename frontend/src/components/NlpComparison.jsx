@@ -16,9 +16,11 @@ function Stat({ label, value, hint }) {
   );
 }
 
-export default function NlpComparison({ comparison }) {
+export default function NlpComparison({ comparison, reviewCount, engineMode }) {
   if (!comparison) return null;
   const c = comparison;
+  // Older analyses compared VADER with Gemini; newer ones compare our NLP engine with it.
+  const ours = engineMode ? "NLP engine" : "VADER";
   const max = Math.max(
     1,
     ...LLM_LABELS.flatMap((l) => VADER_LABELS.map((v) => c.confusion_matrix[l]?.[v] || 0))
@@ -27,14 +29,16 @@ export default function NlpComparison({ comparison }) {
   return (
     <Card className="mt-[18px]">
       <CardHeader className="flex-col gap-0">
-        <CardTitle>NLP vs LLM Sentiment</CardTitle>
+        <CardTitle>{engineMode ? "NLP Engine vs Gemini Benchmark" : "NLP vs LLM Sentiment"}</CardTitle>
         <CardDescription>
-          VADER lexicon (rule-based NLP) compared with Gemini on {c.articles} article
-          {c.articles === 1 ? "" : "s"}
+          {engineMode
+            ? "Our NLP engine (drives the dashboard) checked against Gemini's zero-shot sentiment"
+            : "VADER lexicon (rule-based NLP) compared with Gemini"}{" "}
+          on {c.articles} article{c.articles === 1 ? "" : "s"}
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-1 gap-[18px] pt-3 lg:grid-cols-[1fr_1.3fr]">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
           <Stat
             label="Label agreement"
             value={`${Math.round(c.agreement * 100)}%`}
@@ -48,8 +52,15 @@ export default function NlpComparison({ comparison }) {
           <Stat
             label="Mean score difference"
             value={c.mean_abs_score_diff}
-            hint="average |Gemini − VADER| points"
+            hint={`average |Gemini − ${ours}| points`}
           />
+          {reviewCount != null && (
+            <Stat
+              label="Flagged for human review"
+              value={reviewCount}
+              hint={engineMode ? "engine and Gemini disagree, or low engine confidence" : "NLP and Gemini disagree"}
+            />
+          )}
         </div>
 
         <div className="overflow-x-auto">
@@ -60,7 +71,7 @@ export default function NlpComparison({ comparison }) {
             <thead>
               <tr>
                 <th className="text-left text-[11px] font-medium text-muted-foreground">
-                  Gemini ↓ / VADER →
+                  Gemini ↓ / {ours} →
                 </th>
                 {VADER_LABELS.map((v) => (
                   <th key={v} className="text-center text-[11px] font-medium capitalize text-muted-foreground">
@@ -94,7 +105,8 @@ export default function NlpComparison({ comparison }) {
             </tbody>
           </table>
           <p className="mt-2 text-[11px] text-muted-foreground">
-            Green diagonal = agreement. VADER has no “mixed” class, so mixed articles always count as disagreement.
+            Green diagonal = agreement. {ours} has no “mixed” class;{" "}
+            {engineMode ? "mixed counts as neutral in the agreement figure" : "mixed articles always count as disagreement"}.
           </p>
         </div>
       </CardContent>

@@ -30,7 +30,7 @@ export default function CrisisAlerts({ alerts }) {
           </div>
           {a.suggested_response && (
             <div className="mt-2 text-[13px] text-ink2">
-              <b className="text-primary-ink">Suggested response:</b>{" "}
+              <b className="text-primary-ink">Suggested response (drafted by Gemini):</b>{" "}
               {a.suggested_response}
             </div>
           )}

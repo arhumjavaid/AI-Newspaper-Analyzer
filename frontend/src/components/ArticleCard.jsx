@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin } from "lucide-react";
+import { AlertTriangle, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import ArticleNlp from "./ArticleNlp";
@@ -36,13 +36,21 @@ export default function ArticleCard({ article }) {
           )}
         </h4>
         <div className="flex shrink-0 gap-1.5">
+          {a.needs_review && (
+            <Badge
+              variant="mixed"
+              title={`LLM verdict needs a human check: ${a.review_reasons.join("; ")}`}
+            >
+              <AlertTriangle className="size-3" /> Review
+            </Badge>
+          )}
           {risk && (
             <Badge variant={risk.variant} title="PR risk level">
               <span className={cn("size-1.5 rounded-full", risk.dot)} />
               {risk.label}
             </Badge>
           )}
-          <Badge variant={a.sentiment_label}>
+          <Badge variant={a.sentiment_label} title={a.llm ? "Sentiment from the NLP engine" : undefined}>
             {a.sentiment_label}{" "}
             {a.sentiment_score > 0 ? `+${a.sentiment_score}` : a.sentiment_score}
           </Badge>
@@ -82,10 +90,17 @@ export default function ArticleCard({ article }) {
           </span>
         )}
         {a.entities?.length > 0 && <span>Mentions: {a.entities.join(", ")}</span>}
-        <span>Confidence {Math.round((a.confidence ?? 0) * 100)}%</span>
+        <span>{a.llm ? "NLP confidence" : "Confidence"} {Math.round((a.confidence ?? 0) * 100)}%</span>
       </div>
 
-      <ArticleNlp nlp={a.nlp} llmLabel={a.sentiment_label} />
+      {a.needs_review && (
+        <div className="mt-3 rounded-md border border-mixed/40 bg-mixed/10 px-3 py-2 text-xs text-ink2">
+          <span className="font-semibold">Needs human review:</span>{" "}
+          {a.review_reasons.join(" · ")}
+        </div>
+      )}
+
+      <ArticleNlp nlp={a.nlp} llmLabel={a.llm ? a.llm.sentiment_label : a.sentiment_label} />
     </div>
   );
 }

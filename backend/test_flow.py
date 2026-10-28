@@ -134,6 +134,34 @@ for n in (1, 2):
     print("  nlp comparison  :", m["nlp_comparison"])
     assert all(x["nlp"]["source"] == "body" for x in a["articles"]), "body not used"
     assert m["nlp_comparison"]["articles"] == 3, "nlp_comparison missing"
+    print("  needs review    :", [x["review_reasons"] for x in a["articles"]])
+    print("  engine          :", [(x["sentiment_label"], x["nlp"]["engine"]["method"]) for x in a["articles"]])
+    print("  gemini benchmark:", [x["llm"]["sentiment_label"] for x in a["articles"]])
+    print("  engine topics   :", [x["topics"] for x in a["articles"]])
+    print("  engine summary  :", a["executive_summary"])
+    assert all("needs_review" in x for x in a["articles"]), "needs_review missing"
+    assert m["review_count"] == sum(x["needs_review"] for x in a["articles"])
+    # The dashboard's sentiment must come from the NLP engine, not from Gemini.
+    assert all(x["sentiment_score"] == x["nlp"]["engine"]["score"] for x in a["articles"])
+    assert all(x["llm"]["sentiment_label"] for x in a["articles"]), "Gemini benchmark missing"
+    assert a["llm_executive_summary"] != a["executive_summary"]
+
+# review rule: engine vs Gemini benchmark disagreement must be flagged
+from pipeline.aggregate import review_reasons
+conflict = {"sentiment_label": "positive", "confidence": 0.9, "llm": {"sentiment_label": "negative"}}
+agree = {"sentiment_label": "neutral", "confidence": 0.9, "llm": {"sentiment_label": "mixed"}}
+assert review_reasons(conflict) == ["polarity conflict: NLP engine positive, Gemini benchmark negative"]
+assert review_reasons(agree) == []  # Gemini's "mixed" counts as neutral
+assert review_reasons({**agree, "confidence": 0.4}) == ["low NLP engine confidence (0.40)"]
+
+# engine helpers
+from services import engine
+from services.targets import target_sentence_ids
+sents = ["Rain lashed the city.", "K-Electric said supply was restored.", "The utility added that teams were deployed.", "Traffic was slow."]
+assert target_sentence_ids(sents) == [1, 2], target_sentence_ids(sents)  # coreference follow-up
+assert "load-shedding" in engine.topics("Hours of load-shedding and outages in Lyari")
+ents = engine.entities("Residents of Lyari protested outside NEPRA in Karachi.", {"organisations": ["Karachi"]})
+assert ents["locations"] == ["Lyari"] and ents["organisations"] == ["NEPRA"], ents
 
 # list + trends
 ups = client.get("/api/uploads").json()

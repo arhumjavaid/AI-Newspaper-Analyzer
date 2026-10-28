@@ -10,10 +10,10 @@ from pydantic import BaseModel
 
 import config
 import storage
-from pipeline.aggregate import annotate_risk, build_metrics
+from pipeline.aggregate import annotate_review, annotate_risk, build_metrics
 from pipeline.analyze import AnalysisError, analyze_pages
 from pipeline.extract import PageContent, extract_pages
-from services import nlp
+from services import engine
 
 app = FastAPI(title="AI Newspaper Analyzer")
 
@@ -31,6 +31,7 @@ def health() -> dict:
         "status": "ok",
         "configured": config.is_configured(),
         "model": config.MODEL,
+        "engine": engine.info(),
         "client": config.CLIENT_NAME,
     }
 
@@ -41,13 +42,19 @@ class TextInput(BaseModel):
 
 
 def _analyze_and_store(pages: list[PageContent], source_name: str) -> dict:
-    """Shared pipeline tail: analyse pages, aggregate, persist, return analysis."""
+    """Shared pipeline tail: extract articles, run the NLP engine, aggregate, persist.
+
+    Gemini (analyze_pages) only extracts the articles; services.engine produces every
+    analytical field. Gemini's own sentiment is kept per article under "llm" as a
+    benchmark for the comparison panel and the needs-review flag.
+    """
     try:
         result = analyze_pages(pages)
     except AnalysisError as exc:
         raise HTTPException(status_code=502, detail=str(exc))
 
-    articles = nlp.enrich_articles(annotate_risk(result["articles"]))
+    articles = annotate_review(annotate_risk(engine.analyze_articles(result["articles"])))
+    metrics = build_metrics(articles)
     upload_id = uuid.uuid4().hex[:12]
     analysis = {
         "id": upload_id,
@@ -55,13 +62,15 @@ def _analyze_and_store(pages: list[PageContent], source_name: str) -> dict:
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
         "publication_name": result.get("publication_name"),
         "publication_date": result.get("publication_date"),
-        "executive_summary": result.get("executive_summary"),
+        "executive_summary": engine.executive_summary(articles, metrics),
+        "llm_executive_summary": result.get("executive_summary"),
         "model": result.get("model"),
+        "engine": engine.info(),
         "page_count": len(pages),
         "pages_as_image": sum(1 for p in pages if p.kind == "image"),
         "filtered_out": result.get("filtered_out", 0),
         "articles": articles,
-        "metrics": build_metrics(articles),
+        "metrics": metrics,
     }
     storage.save_upload(upload_id, analysis)
     return analysis

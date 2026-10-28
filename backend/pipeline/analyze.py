@@ -1,4 +1,8 @@
-"""Call the Gemini API (Vertex AI) with the extracted pages and parse a structured result.
+"""Article extraction: call the Gemini API with the pages and parse a structured result.
+
+Gemini's role is extraction (article text, headline, page, prominence); the analysis
+the dashboard shows is done afterwards by services/engine.py. The sentiment fields
+Gemini also returns are kept per article as a benchmark.
 
 Builds the analyst prompt from the Jinja template (client context + output
 schema), sends text pages as text and scanned pages as images, and returns the
@@ -15,6 +19,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 import config
 from pipeline.extract import PageContent
+from services.targets import ALIAS_PATTERNS
 
 _PROMPTS_DIR = config.BASE_DIR / "prompts"
 _env = Environment(
@@ -27,28 +32,7 @@ _ALLOWED_LABELS = {"positive", "negative", "neutral", "mixed"}
 _ALLOWED_PROMINENCE = {"front_page", "prominent", "standard", "minor"}
 
 
-def _build_alias_patterns() -> list[re.Pattern]:
-    """Word-boundary matchers for each client alias.
-
-    Short aliases (e.g. "KE") are matched case-sensitively so they don't fire on
-    substrings like 'marKEt'; longer aliases are case-insensitive.
-    """
-    patterns = []
-    aliases = {config.CLIENT_NAME, *config.CLIENT_ALIASES}
-    for alias in aliases:
-        alias = alias.strip()
-        if not alias:
-            continue
-        # strip a trailing "(...)" e.g. "K-Electric (KE)" -> "K-Electric"
-        core = re.sub(r"\s*\(.*?\)\s*", "", alias).strip() or alias
-        body = re.escape(core)
-        pat = rf"(?<![A-Za-z]){body}(?![A-Za-z])"
-        flags = 0 if len(core) <= 3 else re.IGNORECASE
-        patterns.append(re.compile(pat, flags))
-    return patterns
-
-
-_ALIAS_PATTERNS = _build_alias_patterns()
+_ALIAS_PATTERNS = ALIAS_PATTERNS
 
 
 # Keywords that mark the client's electricity domain. Used to validate "implicit"
@@ -159,7 +143,10 @@ def _extract_json(raw: str) -> dict:
         # Last resort: grab the outermost {...}.
         start, end = raw.find("{"), raw.rfind("}")
         if start != -1 and end != -1 and end > start:
-            return json.loads(raw[start : end + 1])
+            try:
+                return json.loads(raw[start : end + 1])
+            except json.JSONDecodeError:
+                pass
         raise AnalysisError("Model did not return valid JSON.")
 
 
